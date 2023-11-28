@@ -2,7 +2,7 @@ INCLUDE LIB1.ASM
 .MODEL small
 .STACK 100h
 .DATA
-  mNhapTen       db 13, 10, 'CHUC NANG MO FILE'
+  mNhapTen       db 13, 10, 'CHUC NANG SET ATT'
                  db 13, 10, '--------------------'
                  db 13, 10, 10, 'Hay vao ten tep: $'
   mChonThuocTinh db 13, 10, 'Thuoc tinh cua tep:'
@@ -88,12 +88,10 @@ INCLUDE LIB1.ASM
              HienString mErrGetAtt
              call       HIEN_SO_N
 
-
   SucDocAtt: 
              HienString mAtt
              mov        ax, cx
              call       HIEN_SO_N
-
 
   TiepTuc:   
              HienString mTiepTuc
@@ -102,6 +100,7 @@ INCLUDE LIB1.ASM
              cmp        al,'c'
              jne        Exit
              jmp        NhapTenTep
+             
   Exit:      
              
              mov        ah, 4ch
