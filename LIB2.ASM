@@ -5,10 +5,6 @@
 ; (khong duoc danh sai va sua)	  |
 ;---------------------------------
 
-123
-1 
-1*10+2 = 12
-12*10+3 = 123
 
 VAO_SO_N PROC
 	push BX 

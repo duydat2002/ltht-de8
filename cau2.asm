@@ -7,6 +7,7 @@ INCLUDE LIB1.ASM
         nhapSo1  db 13, 10, 'Hay vao so thu nhat: $'
         nhapSo2  db 13, 10, 'Hay vao so thu hai: $'
         ketQua   db 13, 10, 'TBC hai so nguyen la: $'
+        dauAm    db '-$'
         phay     db '.5$'
         mTiepTuc db 13,10,'Co tiep tuc chuong trinh (c/k)? $'
 .CODE
@@ -23,21 +24,35 @@ INCLUDE LIB1.ASM
 
                 HienString nhapSo2
                 call       VAO_SO_N
+
+                HienString ketQua
           
                 xor        dx, dx
                 add        ax, bx
 
                 mov        bx, 2
 
+        
+        ; add ax, ax
+        ; Nếu ax < 0 thì SF = 1. -> js
+        ; Nếu ax ≥ 0 thì SF = 0. -> jns
+        ; Nếu ax = 0 thì ZF = 1. -> jz
+        ; Nếu ax ≠ 0 thì ZF = 0. -> jnz
+
                 cmp        ax, 0
                 jge        DUONG
                 neg        ax
                 neg        bx
-
+ 
         DUONG:  
                 idiv       bx
 
-                HienString ketQua
+        ; Truong hop ket qua la -0
+                cmp        ax, 0
+                jne        HienKQ
+                HienString dauAm
+
+        HienKQ: 
                 call       HIEN_SO_N
 
                 cmp        dx, 0
