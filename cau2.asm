@@ -30,9 +30,6 @@ INCLUDE LIB1.ASM
                 xor        dx, dx
                 add        ax, bx
 
-                mov        bx, 2
-
-        
         ; add ax, ax
         ; Nếu ax < 0 thì SF = 1. -> js
         ; Nếu ax ≥ 0 thì SF = 0. -> jns
@@ -42,15 +39,11 @@ INCLUDE LIB1.ASM
                 cmp        ax, 0
                 jge        DUONG
                 neg        ax
-                neg        bx
+                HienString dauAm
  
         DUONG:  
+                mov        bx, 2
                 idiv       bx
-
-        ; Truong hop ket qua la -0
-                cmp        ax, 0
-                jne        HienKQ
-                HienString dauAm
 
         HienKQ: 
                 call       HIEN_SO_N
