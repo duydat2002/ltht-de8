@@ -5,6 +5,11 @@
 ; (khong duoc danh sai va sua)	  |
 ;---------------------------------
 
+123
+1 
+1*10+2 = 12
+12*10+3 = 123
+
 VAO_SO_N PROC
 	push BX 
 	push CX 
@@ -25,6 +30,12 @@ VAO_SO_N PROC
     VSN2:
 	sub  AL,30h	; Chuyen ky tu vua vao tu ma ASCII sang dang so
 	xor  AH,AH	; AH=0 (AX la so vua vao)
+
+	; 123
+	; 1: ax = 0, cx = 1 -> cx = 1
+	; 2: ax = 1, cx = 2 -> cx = 12
+	; 3: ax = 12, cx = 3 -> cx = 123
+
 	xchg AX,CX	; Doi cheo so vua vao va phan so da vao truoc
 	mul  BX		; Nhan phan so da vao truoc voi 10
 	add  CX,AX	; Cong so vua vao voi phan so da vao sau khi nhan 10
@@ -64,6 +75,17 @@ HIEN_SO_N PROC
 	neg  AX		; Bu 2 de lay gia tri tuyet doi
    HSN1:
 	xor  DX,DX	; DX=0
+
+	;237
+	;ax = 23, dx = 7 -> stack = 7 -> cx = 1
+	;ax = 2, dx = 3 -> stack = 7,3 -> cx = 2
+	;ax = 0, dx = 2 -> stack = 7,3,2 -> cx = 3
+	;
+	;ax = 2 -> 2
+	;ax = 3 -> 23
+	;ax = 7 -> 237
+
+
 	div  BX		; DX:AX chia cho BX (10)
 	add  DX,30h	; Chuyen so du tu dang so ra dang ASCII
 	push DX		; Cat vao stack
